@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<directory>
+	<person id="1">
+	    <lastname>Who</lastname>
+		<firstname>John</firstname>
+		<secondname>Thakur</secondname>
+		<mobilephone>7678767656</mobilephone>
+		<homephone>4525698</homephone>
+		<address>Ukraine</address>
+		<email>who@gmail.com</email>		
+	</person>
+	<person id="2">
+		 <lastname>Zerov</lastname>
+		<firstname>Paul</firstname>
+		<secondname>Dari</secondname>
+		<mobilephone>45675838</mobilephone>
+		<homephone>0007557</homephone>
+		<address>Ukraine</address>
+		<email>zerov.gmail.com</email>	
+	</person>
+</directory>

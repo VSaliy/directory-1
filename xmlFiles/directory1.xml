@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<directory>
+	<person id="1">
+		<lastname>Don</lastname>
+		<firstname>Ben</firstname>
+		<secondname>Din</secondname>
+		<mobilephone>0639858585</mobilephone>
+		<phone>0639858585</phone>
+		<address>Ukraine</address>
+		<email>rty@tyr.com</email>
+	</person>
+</directory>
