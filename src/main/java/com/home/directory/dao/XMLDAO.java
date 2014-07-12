@@ -22,9 +22,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-
 import com.home.directory.domain.PartyContact;
-
 
 public class XMLDAO implements DAO {
 
@@ -35,14 +33,16 @@ public class XMLDAO implements DAO {
 
 		final List<PartyContact> builder;
 
-		DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
+		DocumentBuilderFactory documentFactory = DocumentBuilderFactory
+				.newInstance();
 		DocumentBuilder documentBuilder = null;
 		NodeList nodeList = null;
 
 		try {
 
 			documentBuilder = documentFactory.newDocumentBuilder();
-			Document document = documentBuilder.parse(new File("xmlFiles/directory.xml"));
+			Document document = documentBuilder.parse(new File(
+					"xmlFiles/directory.xml"));
 			// document.getDocumentElement().normalize();
 			nodeList = document.getElementsByTagName("person");
 			// String rootElement = document.getDocumentElement().getNodeName();
@@ -86,7 +86,8 @@ public class XMLDAO implements DAO {
 			builder.add(new PartyContact.PartyContactBuilder()
 					.withLastName(lastname).withFirstName(firstname)
 					.withSecondName(secondname).withMobilePhone(mobilephone)
-					.withHomePhone(homephone).withPostalAdress(address).withEMail(email).build());
+					.withHomePhone(homephone).withPostalAdress(address)
+					.withEMail(email).build());
 
 		}
 
@@ -95,8 +96,7 @@ public class XMLDAO implements DAO {
 	}
 
 	public void write(List<PartyContact> pcList) {
-		
-		
+
 		try {
 
 			DocumentBuilderFactory documentFactory = DocumentBuilderFactory
@@ -108,67 +108,66 @@ public class XMLDAO implements DAO {
 			Document document = documentBuilder.newDocument();
 			Element rootElement = document.createElement("directory");
 			document.appendChild(rootElement);
-			
+
 			int i = 0;
-			
+
 			Iterator<PartyContact> itr = pcList.iterator();
-			while(itr.hasNext()) {
-				PartyContact pc = itr.next();	
-			i++;
-			
-			String id = String.valueOf(i);
-				
-			lastname = pc.getLastName();
-			firstname = pc.getFirstName();
-			secondname = pc.getSecondName();
-			mobilephone = pc.getMobilePhone();
-			homephone = pc.getHomePhone();
-			address = pc.getAddress();
-			email = pc.geteMail();
-			
-				
-			Element person = document.createElement("person");
-			rootElement.appendChild(person);
+			while (itr.hasNext()) {
+				PartyContact pc = itr.next();
+				i++;
 
-			Attr attribute = document.createAttribute("id");
-			attribute.setValue(id);
-			person.setAttributeNode(attribute);
+				String id = String.valueOf(i);
 
-			// lastname elements
-			Element lastnameE = document.createElement("lastname");
-			lastnameE.appendChild(document.createTextNode(lastname));
-			person.appendChild(lastnameE);
+				lastname = pc.getLastName();
+				firstname = pc.getFirstName();
+				secondname = pc.getSecondName();
+				mobilephone = pc.getMobilePhone();
+				homephone = pc.getHomePhone();
+				address = pc.getAddress();
+				email = pc.geteMail();
 
-			// firstname elements
-			Element firstnameE = document.createElement("firstname");
-			firstnameE.appendChild(document.createTextNode(firstname));
-			person.appendChild(firstnameE);
+				Element person = document.createElement("person");
+				rootElement.appendChild(person);
 
-			// secondname elements
-			Element secondnameE = document.createElement("secondname");
-			secondnameE.appendChild(document.createTextNode(secondname));
-			person.appendChild(secondnameE);
+				Attr attribute = document.createAttribute("id");
+				attribute.setValue(id);
+				person.setAttributeNode(attribute);
 
-			// mobilephone elements
-			Element mobilephoneE = document.createElement("mobilephone");
-			mobilephoneE.appendChild(document.createTextNode(mobilephone));
-			person.appendChild(mobilephoneE);
+				// lastname elements
+				Element lastnameE = document.createElement("lastname");
+				lastnameE.appendChild(document.createTextNode(lastname));
+				person.appendChild(lastnameE);
 
-			// phone elements
-			Element homePhoneE = document.createElement("phone");
-			homePhoneE.appendChild(document.createTextNode(homephone));
-			person.appendChild(homePhoneE);
+				// firstname elements
+				Element firstnameE = document.createElement("firstname");
+				firstnameE.appendChild(document.createTextNode(firstname));
+				person.appendChild(firstnameE);
 
-			// address elements
-			Element addressE = document.createElement("address");
-			addressE.appendChild(document.createTextNode(address));
-			person.appendChild(addressE);
+				// secondname elements
+				Element secondnameE = document.createElement("secondname");
+				secondnameE.appendChild(document.createTextNode(secondname));
+				person.appendChild(secondnameE);
 
-			// email elements
-			Element emailE = document.createElement("email");
-			emailE.appendChild(document.createTextNode(email));
-			person.appendChild(emailE);
-			
+				// mobilephone elements
+				Element mobilephoneE = document.createElement("mobilephone");
+				mobilephoneE.appendChild(document.createTextNode(mobilephone));
+				person.appendChild(mobilephoneE);
+
+				// phone elements
+				Element homePhoneE = document.createElement("phone");
+				homePhoneE.appendChild(document.createTextNode(homephone));
+				person.appendChild(homePhoneE);
+
+				// address elements
+				Element addressE = document.createElement("address");
+				addressE.appendChild(document.createTextNode(address));
+				person.appendChild(addressE);
+
+				// email elements
+				Element emailE = document.createElement("email");
+				emailE.appendChild(document.createTextNode(email));
+				person.appendChild(emailE);
+
 			}
 
 			// creating and writing to xml file
