@@ -1,10 +1,10 @@
 package com.home.directory.dao;
 
 import java.io.File;
-import java.io.FileInputStream;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.*;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -21,19 +21,19 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
+
 
 import com.home.directory.domain.PartyContact;
-import com.home.directory.domain.PartyContact.PartyContactBuilder;
+
 
 public class XMLDAO implements DAO {
 
 	String id, lastname, firstname, secondname, mobilephone, homephone,
 			address, email;
 
-	public ArrayList<PartyContact> read() {
+	public List<PartyContact> read() {
 
-		final ArrayList<PartyContact> builder;
+		final List<PartyContact> builder;
 
 		DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder documentBuilder = null;
@@ -94,16 +94,9 @@ public class XMLDAO implements DAO {
 
 	}
 
-	public void write(PartyContact pc) {
-
-		lastname = pc.getLastName();
-		firstname = pc.getFirstName();
-		secondname = pc.getSecondName();
-		mobilephone = pc.getMobilePhone();
-		homephone = pc.getHomePhone();
-		address = pc.getAddress();
-		email = pc.geteMail();
-
+	public void write(List<PartyContact> pcList) {
+		
+		
 		try {
 
 			DocumentBuilderFactory documentFactory = DocumentBuilderFactory
@@ -115,12 +108,30 @@ public class XMLDAO implements DAO {
 			Document document = documentBuilder.newDocument();
 			Element rootElement = document.createElement("directory");
 			document.appendChild(rootElement);
-
+			
+			int i = 0;
+			
+			Iterator<PartyContact> itr = pcList.iterator();
+			while(itr.hasNext()) {
+				PartyContact pc = itr.next();	
+			i++;
+			
+			String id = String.valueOf(i);
+				
+			lastname = pc.getLastName();
+			firstname = pc.getFirstName();
+			secondname = pc.getSecondName();
+			mobilephone = pc.getMobilePhone();
+			homephone = pc.getHomePhone();
+			address = pc.getAddress();
+			email = pc.geteMail();
+			
+				
 			Element person = document.createElement("person");
 			rootElement.appendChild(person);
 
 			Attr attribute = document.createAttribute("id");
-			attribute.setValue("1");
+			attribute.setValue(id);
 			person.setAttributeNode(attribute);
 
 			// lastname elements
@@ -157,6 +168,8 @@ public class XMLDAO implements DAO {
 			Element emailE = document.createElement("email");
 			emailE.appendChild(document.createTextNode(email));
 			person.appendChild(emailE);
+			
+			}
 
 			// creating and writing to xml file
 			TransformerFactory transformerFactory = TransformerFactory
