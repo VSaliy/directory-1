@@ -27,7 +27,7 @@ import com.home.directory.domain.PartyContact;
 public class XMLDAO implements DAO {
 
 	String id, lastname, firstname, secondname, mobilephone, homephone,
-			address, email;
+			address, email; //<-------
 
 	public List<PartyContact> read() {
 
